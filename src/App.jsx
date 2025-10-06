@@ -22,3 +22,6 @@ function App() {
 }
 
 export default App
+
+// mockapi
+// https://68e44eff8e116898997b8579.mockapi.io/productos
