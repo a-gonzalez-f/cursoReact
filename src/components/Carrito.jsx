@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Carrito = ({ productosAgregados }) => {
+const Carrito = ({ productosAgregados, incrementarCantidad, disminuirCantidad }) => {
   const productosAgrupados = productosAgregados?.reduce((acc, producto) => {
     const existente = acc.find(p => p.id === producto.id);
     if (existente) {
@@ -24,8 +24,12 @@ const Carrito = ({ productosAgregados }) => {
             <div className='producto enCarrito' key={producto.id}>
               <h3>{producto.nombre}</h3>
               <p>Precio unitario: ${producto.precio}</p>
-              <p>Cantidad: {producto.cantidad}</p>
-              <p>Subtotal: ${producto.precio * producto.cantidad}</p>
+              <div className='cantidad dfcc'>
+                <button className='amountBtn dfcc' onClick={() => disminuirCantidad(producto.id)}>-</button>
+                <span>{producto.cantidad}</span>
+                <button className='amountBtn dfcc' onClick={() => incrementarCantidad(producto.id)}>+</button>
+              </div>
+              <p>Subtotal: ${(producto.precio * producto.cantidad).toFixed(2)}</p>
             </div>
           ))
         ) : (
@@ -33,12 +37,12 @@ const Carrito = ({ productosAgregados }) => {
         )}
       </div>
       {total ? (
-          <div className='total'>
-            <p>
-              TOTAL: <span>${total.toFixed(2)}</span>
-            </p>
-          </div>
-        ) : null}
+        <div className='total'>
+          <p>
+            TOTAL: <span>${total.toFixed(2)}</span>
+          </p>
+        </div>
+      ) : null}
     </div>
   );
 };

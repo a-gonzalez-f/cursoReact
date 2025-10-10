@@ -4,7 +4,7 @@ const ListarProductos = ({ productos, agregarAlCarrito }) => {
   return (
     <div className='container productos'>
       {productos.map((producto, index) => (
-        <div className='producto card' key={index}>
+        <div className='producto card' key={producto.id}>
           <img src={producto.imagen} alt={producto.nombre} />
           <h3>{producto.nombre}</h3>
           <p>Categoría: {producto.categoria}</p>

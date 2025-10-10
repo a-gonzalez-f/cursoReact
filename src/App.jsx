@@ -5,7 +5,6 @@ import Carrito from './components/Carrito';
 import Header from './components/Header';
 
 function App() {
-
   const [carrito, setCarrito] = useState([]);
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -13,6 +12,22 @@ function App() {
 
   const agregarAlCarrito = (producto) => {
     setCarrito([...carrito, producto]);
+  };
+
+  const incrementarCantidad = (id) => {
+    const nuevoCarrito = carrito.concat(
+      carrito.find((p) => p.id === id)
+    );
+    setCarrito(nuevoCarrito);
+  };
+
+  const disminuirCantidad = (id) => {
+    const index = carrito.findIndex((p) => p.id === id);
+    if (index !== -1) {
+      const nuevoCarrito = [...carrito];
+      nuevoCarrito.splice(index, 1);
+      setCarrito(nuevoCarrito);
+    }
   };
 
   useEffect(() => {
@@ -34,7 +49,11 @@ function App() {
     <>
       <Header />
       <ListarProductos productos={productos} agregarAlCarrito={agregarAlCarrito} />
-      <Carrito productosAgregados={carrito} />
+      <Carrito 
+        productosAgregados={carrito} 
+        incrementarCantidad={incrementarCantidad}
+        disminuirCantidad={disminuirCantidad}
+      />
     </>
   );
 }
