@@ -21,7 +21,7 @@ const Carrito = ({ productosAgregados }) => {
       <div className='container'>
         {productosAgrupados && productosAgrupados.length > 0 ? (
           productosAgrupados.map((producto) => (
-            <div className='producto card' key={producto.id}>
+            <div className='producto enCarrito' key={producto.id}>
               <h3>{producto.nombre}</h3>
               <p>Precio unitario: ${producto.precio}</p>
               <p>Cantidad: {producto.cantidad}</p>
@@ -31,15 +31,14 @@ const Carrito = ({ productosAgregados }) => {
         ) : (
           "Sin productos agregados"
         )}
-
-        {total ? (
+      </div>
+      {total ? (
           <div className='total'>
             <p>
               TOTAL: <span>${total.toFixed(2)}</span>
             </p>
           </div>
         ) : null}
-      </div>
     </div>
   );
 };
