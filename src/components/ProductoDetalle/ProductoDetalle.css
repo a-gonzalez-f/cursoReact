@@ -1,0 +1,12 @@
+.productoDetalle {
+  display: flex;
+  width: 80vw;
+  justify-content: space-around;
+}
+
+.detalle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+}

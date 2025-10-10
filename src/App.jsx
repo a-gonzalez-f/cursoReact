@@ -1,8 +1,14 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import ListarProductos from './components/ListarProductos';
-import Carrito from './components/Carrito';
-import Header from './components/Header';
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header/Header";
+import ListarProductos from "./components/ListarProducto/ListarProductos";
+import Carrito from "./components/Carrito/Carrito";
+import ProductoDetalle from "./components/ProductoDetalle/ProductoDetalle";
+import Categorias from "./components/Categorias/Categorias";
+import About from "./components/About/About";
+import Contacto from "./components/Contacto/Contacto";
 
 function App() {
   const [carrito, setCarrito] = useState([]);
@@ -15,9 +21,7 @@ function App() {
   };
 
   const incrementarCantidad = (id) => {
-    const nuevoCarrito = carrito.concat(
-      carrito.find((p) => p.id === id)
-    );
+    const nuevoCarrito = carrito.concat(carrito.find((p) => p.id === id));
     setCarrito(nuevoCarrito);
   };
 
@@ -32,13 +36,13 @@ function App() {
 
   useEffect(() => {
     setCargando(true);
-    fetch('https://68e44eff8e116898997b8579.mockapi.io/productos')
-      .then(res => {
-        if (!res.ok) throw new Error('Error al cargar los productos');
+    fetch("https://68e44eff8e116898997b8579.mockapi.io/productos")
+      .then((res) => {
+        if (!res.ok) throw new Error("Error al cargar los productos");
         return res.json();
       })
-      .then(data => setProductos(data))
-      .catch(err => setError(err.message))
+      .then((data) => setProductos(data))
+      .catch((err) => setError(err.message))
       .finally(() => setCargando(false));
   }, []);
 
@@ -46,15 +50,29 @@ function App() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <>
+    <Router>
       <Header />
-      <ListarProductos productos={productos} agregarAlCarrito={agregarAlCarrito} />
-      <Carrito 
-        productosAgregados={carrito} 
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ListarProductos
+              productos={productos}
+              agregarAlCarrito={agregarAlCarrito}
+            />
+          }
+        />
+        <Route path="/producto/:id" element={<ProductoDetalle />} />
+        <Route path="/categorias" element={<Categorias />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contacto" element={<Contacto />} />
+      </Routes>
+      <Carrito
+        productosAgregados={carrito}
         incrementarCantidad={incrementarCantidad}
         disminuirCantidad={disminuirCantidad}
       />
-    </>
+    </Router>
   );
 }
 

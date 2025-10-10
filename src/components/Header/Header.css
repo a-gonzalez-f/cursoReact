@@ -1,0 +1,27 @@
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  width: 100vw;
+  z-index: 2;
+  background-color: var(--color-bg);
+}
+
+nav {
+  display: flex;
+  gap: 10px;
+}
+
+a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-secondary);
+}
