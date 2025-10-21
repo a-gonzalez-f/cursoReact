@@ -31,10 +31,12 @@ const ProductoDetalle = () => {
       </div>
       <div className="detalle border">
         <h2>{producto.nombre}</h2>
-        <p>Categoría: {producto.categoria}</p>
-        <p>Descripción: {producto.descripcion || "No hay descripción"}</p>
-        <p>Stock: {producto.stock || "Sin stock"}</p>
-        <p>Precio: ${producto.precio}</p>
+        <p>{producto.categoria}</p>
+        <p>{producto.descripcion || "No hay descripción"}</p>
+        <div className="row">
+          <p className="precio">${producto.precio}</p>
+          <p className="text-muted">Stock: {producto.stock || "Sin stock"}</p>
+        </div>
       </div>
     </div>
   );
