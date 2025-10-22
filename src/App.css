@@ -52,6 +52,7 @@ button {
   padding: 1rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
 }
 
 .card:hover {
@@ -85,4 +86,18 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
   padding: 1rem 10vw;
+}
+
+.producto.card {
+  padding-top: 2rem;
+}
+
+.precioEsquina {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  border-radius: 0 10px;
 }

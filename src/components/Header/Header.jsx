@@ -1,8 +1,10 @@
 import "./Header.css";
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 
 const Header = ({ isAuthenticated, setIsAuthenticated }) => {
+  const location = useLocation();
+
   const handleLogout = () => {
     setIsAuthenticated(false);
   };
@@ -11,22 +13,42 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
     return <Navigate to="/login" />;
   }
 
+  // Función para verificar si una ruta está activa
+  const isActive = (path) => location.pathname === path;
+
   return (
     <header>
       <h1 className="mainTitle">E-Commerce</h1>
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/categorias">Categorias</Link>
-        <Link to="/about">Sobre nosotros</Link>
-        <Link to="/contacto">Contacto</Link>
+        <Link className={isActive("/") ? "active" : ""} to="/">
+          Home
+        </Link>
+        <Link
+          className={isActive("/categorias") ? "active" : ""}
+          to="/categorias"
+        >
+          Categorias
+        </Link>
+        <Link className={isActive("/about") ? "active" : ""} to="/about">
+          Sobre nosotros
+        </Link>
+        <Link className={isActive("/contacto") ? "active" : ""} to="/contacto">
+          Contacto
+        </Link>
 
         {isAuthenticated ? (
           <>
-            <Link to="/admin">Admin</Link>
-            <button onClick={handleLogout}>Cerrar sesión</button>
+            <Link className={isActive("/admin") ? "active" : ""} to="/admin">
+              Admin
+            </Link>
+            <button className="log" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
           </>
         ) : (
-          <Link to="/login">Iniciar sesión</Link>
+          <Link className={isActive("/login") ? "active" : ""} to="/login">
+            Iniciar sesión
+          </Link>
         )}
       </nav>
     </header>

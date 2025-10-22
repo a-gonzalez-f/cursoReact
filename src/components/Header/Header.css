@@ -9,6 +9,7 @@ header {
   width: 100vw;
   z-index: 2;
   background-color: var(--color-bg);
+  height: 5vh;
 }
 
 nav {
@@ -16,12 +17,21 @@ nav {
   gap: 10px;
 }
 
-a {
+a,
+.log {
   color: var(--color-text-muted);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-a:hover {
+a:hover,
+.log:hover {
   color: var(--color-secondary);
+  border: none;
+}
+
+.log {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
 }
