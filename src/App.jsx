@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import ListarProductos from "./components/ListarProducto/ListarProductos";
@@ -9,12 +9,15 @@ import ProductoDetalle from "./components/ProductoDetalle/ProductoDetalle";
 import Categorias from "./components/Categorias/Categorias";
 import About from "./components/About/About";
 import Contacto from "./components/Contacto/Contacto";
+import Admin from "./components/Admin/Admin";
+import Login from "./components/Login/Login";
 
 function App() {
   const [carrito, setCarrito] = useState([]);
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const agregarAlCarrito = (producto) => {
     setCarrito([...carrito, producto]);
@@ -49,9 +52,19 @@ function App() {
   if (cargando) return <p>Cargando productos...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  const ProtectedRoute = ({ children }) => {
+    if (!isAuthenticated) {
+      return <Navigate to="/login" />;
+    }
+    return children;
+  };
+
   return (
     <Router>
-      <Header />
+      <Header
+        isAuthenticated={isAuthenticated}
+        setIsAuthenticated={setIsAuthenticated}
+      />
       <Routes>
         <Route
           path="/"
@@ -66,6 +79,33 @@ function App() {
         <Route path="/categorias" element={<Categorias />} />
         <Route path="/about" element={<About />} />
         <Route path="/contacto" element={<Contacto />} />
+        {/* Rutas protegidas */}
+        <Route
+          path="/carrito"
+          element={
+            <ProtectedRoute>
+              <Carrito />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute>
+          }
+        />
+        {/* Ruta de login */}
+        <Route
+          path="/login"
+          element={
+            <Login
+              setIsAuthenticated={setIsAuthenticated}
+              isAuthenticated={isAuthenticated}
+            />
+          }
+        />
       </Routes>
       <Carrito
         productosAgregados={carrito}

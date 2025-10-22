@@ -1,16 +1,33 @@
 import "./Header.css";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ isAuthenticated, setIsAuthenticated }) => {
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <header>
-      <h1 className="mainTitle">Título</h1>
+      <h1 className="mainTitle">E-Commerce</h1>
       <nav>
         <Link to="/">Home</Link>
         <Link to="/categorias">Categorias</Link>
-        <Link to="/contacto">Contacto</Link>
         <Link to="/about">Sobre nosotros</Link>
+        <Link to="/contacto">Contacto</Link>
+
+        {isAuthenticated ? (
+          <>
+            <Link to="/admin">Admin</Link>
+            <button onClick={handleLogout}>Cerrar sesión</button>
+          </>
+        ) : (
+          <Link to="/login">Iniciar sesión</Link>
+        )}
       </nav>
     </header>
   );
