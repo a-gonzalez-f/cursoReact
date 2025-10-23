@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { useParams } from "react-router-dom";
+import useCartContext from "../../context/useCartContext";
 
-const ItemDetailContainer = ({ agregarAlCarrito }) => {
+const ItemDetailContainer = () => {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const { agregarAlCarrito } = useCartContext();
 
   useEffect(() => {
     setCargando(true);

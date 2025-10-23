@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ItemList from "../ItemList/ItemList";
+import useCartContext from "../../context/useCartContext";
 
-const ItemListContainer = ({ agregarAlCarrito }) => {
+const ItemListContainer = () => {
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const { agregarAlCarrito } = useCartContext();
 
   useEffect(() => {
     setCargando(true);

@@ -1,17 +1,20 @@
 import "./Nav.css";
 import React from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import useCartContext from "../../context/useCartContext";
 
-const HeaderNav = ({ isAuthenticated, setIsAuthenticated }) => {
+const Nav = ({ isAuthenticated, setIsAuthenticated }) => {
   const location = useLocation();
+  const { productosAgregados } = useCartContext();
+
+  const cantidadTotal = productosAgregados.reduce(
+    (acc, producto) => acc + producto.cantidad,
+    0
+  );
 
   const handleLogout = () => {
     setIsAuthenticated(false);
   };
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
 
   const isActive = (path) => location.pathname === path;
 
@@ -26,7 +29,7 @@ const HeaderNav = ({ isAuthenticated, setIsAuthenticated }) => {
           className={isActive("/categorias") ? "active" : ""}
           to="/categorias"
         >
-          Categorias
+          Categorías
         </Link>
         <Link className={isActive("/about") ? "active" : ""} to="/about">
           Sobre nosotros
@@ -39,6 +42,12 @@ const HeaderNav = ({ isAuthenticated, setIsAuthenticated }) => {
           <>
             <Link className={isActive("/admin") ? "active" : ""} to="/admin">
               Admin
+            </Link>
+            <Link
+              className={isActive("/carrito") ? "active" : ""}
+              to="/carrito"
+            >
+              Carrito ({cantidadTotal ? cantidadTotal : "vacío"}){" "}
             </Link>
             <button className="log" onClick={handleLogout}>
               Cerrar sesión
@@ -54,4 +63,4 @@ const HeaderNav = ({ isAuthenticated, setIsAuthenticated }) => {
   );
 };
 
-export default HeaderNav;
+export default Nav;
