@@ -1,4 +1,5 @@
 import React from "react";
+import "./carrito.css";
 import useCartContext from "../../context/useCartContext";
 
 const Carrito = () => {
@@ -11,30 +12,37 @@ const Carrito = () => {
   );
 
   return (
-    <div
-      className={`carrito ${
-        productosAgregados.length > 0 ? "visible" : "hidden"
-      }`}
-    >
+    <div className={`carrito`}>
       <h2>Carrito</h2>
       <div className="container">
         {productosAgregados.length > 0 ? (
           productosAgregados.map((producto) => (
-            <div className="producto enCarrito" key={producto.id}>
+            <div className="enCarrito" key={producto.id}>
               <h3>{producto.nombre}</h3>
-              <p>Precio unitario: ${producto.precio}</p>
-              <div className="cantidad dfcc">
-                <button onClick={() => disminuirCantidad(producto.id)}>
-                  -
-                </button>
-                <span>{producto.cantidad}</span>
-                <button onClick={() => incrementarCantidad(producto.id)}>
-                  +
-                </button>
+              <div className="contDetalle">
+                <p>Precio unitario: ${producto.precio}</p>
+                <div className="cantidad dfcc">
+                  <div className="dfcc">
+                    <button
+                      className="amountBtn"
+                      onClick={() => disminuirCantidad(producto.id)}
+                    >
+                      -
+                    </button>
+                    <span>{producto.cantidad}</span>
+                    <button
+                      className="amountBtn"
+                      onClick={() => incrementarCantidad(producto.id)}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <p>
+                    Subtotal: $
+                    {(producto.precio * producto.cantidad).toFixed(2)}
+                  </p>
+                </div>
               </div>
-              <p>
-                Subtotal: ${(producto.precio * producto.cantidad).toFixed(2)}
-              </p>
             </div>
           ))
         ) : (
