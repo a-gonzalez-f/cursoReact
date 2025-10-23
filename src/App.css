@@ -91,4 +91,8 @@ footer {
 .producto.card {
   padding-top: 2rem;
   width: 300px;
+  min-height: 45vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }

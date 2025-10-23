@@ -25,12 +25,6 @@ const Nav = ({ isAuthenticated, setIsAuthenticated }) => {
         <Link className={isActive("/") ? "active" : ""} to="/">
           Home
         </Link>
-        <Link
-          className={isActive("/categorias") ? "active" : ""}
-          to="/categorias"
-        >
-          Categorías
-        </Link>
         <Link className={isActive("/about") ? "active" : ""} to="/about">
           Sobre nosotros
         </Link>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 const Login = ({ setIsAuthenticated, isAuthenticated }) => {
@@ -7,7 +7,7 @@ const Login = ({ setIsAuthenticated, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    return <Navigate to="/admin" />;
+    return <Navigate to="/" />;
   }
 
   return (

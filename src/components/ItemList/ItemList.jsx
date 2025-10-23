@@ -1,7 +1,7 @@
 import React from "react";
 import Item from "../Item/Item";
 
-const ItemList = ({ productos, agregarAlCarrito }) => {
+const ItemList = ({ productos, agregarAlCarrito, isAuthenticated }) => {
   return (
     <div className="container productos">
       {productos.map((producto) => (
@@ -9,6 +9,7 @@ const ItemList = ({ productos, agregarAlCarrito }) => {
           key={producto.id}
           producto={producto}
           agregarAlCarrito={agregarAlCarrito}
+          isAuthenticated={isAuthenticated}
         />
       ))}
     </div>

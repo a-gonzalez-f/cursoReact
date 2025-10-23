@@ -1,8 +1,19 @@
 import React from "react";
 import "./Item.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Item = ({ producto, agregarAlCarrito }) => {
+const Item = ({ producto, agregarAlCarrito, isAuthenticated }) => {
+  const navigate = useNavigate();
+
+  const handleAgregarAlCarrito = () => {
+    console.log("isAuthenticated:", isAuthenticated);
+    if (isAuthenticated) {
+      agregarAlCarrito(producto);
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <div className="producto card">
       <Link to={`/producto/${producto.id}`}>
@@ -15,9 +26,7 @@ const Item = ({ producto, agregarAlCarrito }) => {
         <p>{producto.categoria}</p>
         <p className="precioEsquina">${producto.precio}</p>
       </Link>
-      <button onClick={() => agregarAlCarrito(producto)}>
-        Agregar al carrito
-      </button>
+      <button onClick={handleAgregarAlCarrito}>Agregar al carrito</button>
     </div>
   );
 };
