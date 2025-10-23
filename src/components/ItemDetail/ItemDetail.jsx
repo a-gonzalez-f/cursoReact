@@ -1,7 +1,7 @@
 import "./ItemDetail.css";
 import React from "react";
 
-const ItemDetail = ({ producto }) => {
+const ItemDetail = ({ producto, agregarAlCarrito }) => {
   if (!producto) return <p>Producto no encontrado</p>;
 
   return (
@@ -13,14 +13,19 @@ const ItemDetail = ({ producto }) => {
           className="imageDetail"
         />
       </div>
-      <div className="detalle border">
-        <h2>{producto.nombre}</h2>
-        <p>{producto.categoria}</p>
-        <p>{producto.descripcion || "No hay descripción"}</p>
-        <div className="row">
-          <p className="precio">${producto.precio}</p>
-          <p className="text-muted">Stock: {producto.stock || "Sin stock"}</p>
+      <div className="containerDetalle">
+        <div className="detalle border">
+          <h2>{producto.nombre}</h2>
+          <p>{producto.categoria}</p>
+          <p>{producto.descripcion || "No hay descripción"}</p>
+          <div className="row">
+            <p className="precio">${producto.precio}</p>
+            <p className="text-muted">Stock: {producto.stock || "Sin stock"}</p>
+          </div>
         </div>
+        <button onClick={() => agregarAlCarrito(producto)}>
+          Agregar al carrito
+        </button>
       </div>
     </div>
   );

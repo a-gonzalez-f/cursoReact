@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { useParams } from "react-router-dom";
 
-const ItemDetailContainer = () => {
+const ItemDetailContainer = ({ agregarAlCarrito }) => {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
@@ -24,7 +24,7 @@ const ItemDetailContainer = () => {
   if (error) return <p>Error: {error}</p>;
   if (!producto) return <p>Producto no encontrado</p>;
 
-  return <ItemDetail producto={producto} />;
+  return <ItemDetail producto={producto} agregarAlCarrito={agregarAlCarrito} />;
 };
 
 export default ItemDetailContainer;

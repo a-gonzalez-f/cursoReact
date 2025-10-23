@@ -5,12 +5,19 @@
   align-items: flex-start;
 }
 
+.containerDetalle {
+  min-width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .detalle {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 1rem;
-  min-width: 33%;
+  min-width: 30vw;
 }
 
 .row {

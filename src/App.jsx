@@ -5,7 +5,6 @@ import "./App.css";
 import Nav from "./components/Nav/Nav";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 import Carrito from "./components/Carrito/Carrito";
-import ItemDetail from "./components/ItemDetail/ItemDetail";
 import Categorias from "./components/Categorias/Categorias";
 import About from "./components/About/About";
 import Contacto from "./components/Contacto/Contacto";
@@ -53,7 +52,10 @@ function App() {
           path="/"
           element={<ItemListContainer agregarAlCarrito={agregarAlCarrito} />}
         />
-        <Route path="/producto/:id" element={<ItemDetailContainer />} />
+        <Route
+          path="/producto/:id"
+          element={<ItemDetailContainer agregarAlCarrito={agregarAlCarrito} />}
+        />
         <Route path="/categorias" element={<Categorias />} />
         <Route path="/about" element={<About />} />
         <Route path="/contacto" element={<Contacto />} />
