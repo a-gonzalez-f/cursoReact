@@ -1,8 +1,8 @@
-import "./ProductoDetalle.css";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import ItemDetail from "../ItemDetail/ItemDetail";
 import { useParams } from "react-router-dom";
 
-const ProductoDetalle = () => {
+const ItemDetailContainer = () => {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
@@ -24,22 +24,7 @@ const ProductoDetalle = () => {
   if (error) return <p>Error: {error}</p>;
   if (!producto) return <p>Producto no encontrado</p>;
 
-  return (
-    <div className="productoDetalle">
-      <div>
-        <img src={producto.imagen} alt={producto.nombre} />
-      </div>
-      <div className="detalle border">
-        <h2>{producto.nombre}</h2>
-        <p>{producto.categoria}</p>
-        <p>{producto.descripcion || "No hay descripción"}</p>
-        <div className="row">
-          <p className="precio">${producto.precio}</p>
-          <p className="text-muted">Stock: {producto.stock || "Sin stock"}</p>
-        </div>
-      </div>
-    </div>
-  );
+  return <ItemDetail producto={producto} />;
 };
 
-export default ProductoDetalle;
+export default ItemDetailContainer;

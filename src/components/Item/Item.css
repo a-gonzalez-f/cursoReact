@@ -1,0 +1,16 @@
+.precioEsquina {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: 600;
+  padding: 5px 10px;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  border-radius: 0 10px;
+  box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.33);
+}
+
+.smallImage {
+  width: 200px;
+  height: 200px;
+}

@@ -1,8 +1,8 @@
-import "./Header.css";
+import "./Nav.css";
 import React from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 
-const Header = ({ isAuthenticated, setIsAuthenticated }) => {
+const HeaderNav = ({ isAuthenticated, setIsAuthenticated }) => {
   const location = useLocation();
 
   const handleLogout = () => {
@@ -13,7 +13,6 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
     return <Navigate to="/login" />;
   }
 
-  // Función para verificar si una ruta está activa
   const isActive = (path) => location.pathname === path;
 
   return (
@@ -55,4 +54,4 @@ const Header = ({ isAuthenticated, setIsAuthenticated }) => {
   );
 };
 
-export default Header;
+export default HeaderNav;

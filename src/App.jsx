@@ -1,22 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import "./App.css";
-import Header from "./components/Header/Header";
-import ListarProductos from "./components/ListarProducto/ListarProductos";
+import Nav from "./components/Nav/Nav";
+import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 import Carrito from "./components/Carrito/Carrito";
-import ProductoDetalle from "./components/ProductoDetalle/ProductoDetalle";
+import ItemDetail from "./components/ItemDetail/ItemDetail";
 import Categorias from "./components/Categorias/Categorias";
 import About from "./components/About/About";
 import Contacto from "./components/Contacto/Contacto";
 import Admin from "./components/Admin/Admin";
 import Login from "./components/Login/Login";
+import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer";
 
 function App() {
   const [carrito, setCarrito] = useState([]);
-  const [productos, setProductos] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const agregarAlCarrito = (producto) => {
@@ -37,21 +35,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    setCargando(true);
-    fetch("https://68e44eff8e116898997b8579.mockapi.io/productos")
-      .then((res) => {
-        if (!res.ok) throw new Error("Error al cargar los productos");
-        return res.json();
-      })
-      .then((data) => setProductos(data))
-      .catch((err) => setError(err.message))
-      .finally(() => setCargando(false));
-  }, []);
-
-  if (cargando) return <p>Cargando productos...</p>;
-  if (error) return <p>Error: {error}</p>;
-
   const ProtectedRoute = ({ children }) => {
     if (!isAuthenticated) {
       return <Navigate to="/login" />;
@@ -61,21 +44,16 @@ function App() {
 
   return (
     <Router>
-      <Header
+      <Nav
         isAuthenticated={isAuthenticated}
         setIsAuthenticated={setIsAuthenticated}
       />
       <Routes>
         <Route
           path="/"
-          element={
-            <ListarProductos
-              productos={productos}
-              agregarAlCarrito={agregarAlCarrito}
-            />
-          }
+          element={<ItemListContainer agregarAlCarrito={agregarAlCarrito} />}
         />
-        <Route path="/producto/:id" element={<ProductoDetalle />} />
+        <Route path="/producto/:id" element={<ItemDetailContainer />} />
         <Route path="/categorias" element={<Categorias />} />
         <Route path="/about" element={<About />} />
         <Route path="/contacto" element={<Contacto />} />

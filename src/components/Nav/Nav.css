@@ -31,7 +31,12 @@ a:hover,
 }
 
 .log {
+  border: none;
   background-color: transparent;
   padding: 0;
   margin: 0;
+  position: absolute;
+  right: 2rem;
+  top: 0;
+  height: 5vh;
 }
