@@ -20,7 +20,7 @@ const Nav = ({ isAuthenticated, setIsAuthenticated }) => {
 
   return (
     <header>
-      <h1 className="mainTitle">E-Commerce</h1>
+      <h1 className="mainTitle">Commerce</h1>
       <nav>
         <Link className={isActive("/") ? "active" : ""} to="/">
           Home
