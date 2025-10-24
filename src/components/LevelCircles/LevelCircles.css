@@ -1,0 +1,29 @@
+.perfilContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.perfilContainer.enItem {
+  padding: 0 10%;
+}
+
+.perfilContainer.enDetail {
+  width: 30%;
+}
+
+.circlesContainer {
+  display: flex;
+  gap: 5px;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--color-text-muted);
+}
+
+.pintado {
+  background-color: var(--color-border);
+}

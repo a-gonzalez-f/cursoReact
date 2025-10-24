@@ -1,5 +1,6 @@
-import "./ItemDetail.css";
 import React from "react";
+import "./ItemDetail.css";
+import LevelCircles from "../LevelCircles/LevelCircles";
 
 const ItemDetail = ({ producto, agregarAlCarrito }) => {
   if (!producto) return <p>Producto no encontrado</p>;
@@ -17,6 +18,15 @@ const ItemDetail = ({ producto, agregarAlCarrito }) => {
         <div className="detalle border">
           <h2>{producto.nombre}</h2>
           <p>{producto.categoria}</p>
+          <div className="perfilContainer enDetail">
+            <p>Intensidad</p>
+            <LevelCircles valor={producto.intensidad} />
+          </div>
+
+          <div className="perfilContainer enDetail">
+            <p>Amargor</p>
+            <LevelCircles valor={producto.amargor} />
+          </div>
           <p>{producto.descripcion || "No hay descripción"}</p>
           <div className="row">
             <p className="precio">${producto.precio}</p>
