@@ -1,5 +1,5 @@
 import React from "react";
-import "./carrito.css";
+import "./Carrito.css";
 import useCartContext from "../../context/useCartContext";
 
 const Carrito = () => {

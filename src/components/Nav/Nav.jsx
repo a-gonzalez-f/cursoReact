@@ -38,10 +38,15 @@ const Nav = ({ isAuthenticated, setIsAuthenticated }) => {
               Admin
             </Link>
             <Link
-              className={isActive("/carrito") ? "active" : ""}
+              className={isActive("/carrito") ? "active aCarrito" : "aCarrito"}
               to="/carrito"
             >
-              Carrito ({cantidadTotal ? cantidadTotal : "vacío"}){" "}
+              Carrito{" "}
+              {cantidadTotal ? (
+                <p className="cantItemsCarrito">{cantidadTotal}</p>
+              ) : (
+                ""
+              )}
             </Link>
             <button className="log" onClick={handleLogout}>
               Cerrar sesión
