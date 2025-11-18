@@ -5,20 +5,22 @@ const CartProvider = ({ children }) => {
   const [productosAgregados, setProductosAgregados] = useState([]);
 
   const agregarAlCarrito = (producto) => {
-    const existente = productosAgregados.find((p) => p.id === producto.id);
-    if (existente) {
-      incrementarCantidad(producto.id);
-    } else {
-      setProductosAgregados([
-        ...productosAgregados,
-        { ...producto, cantidad: 1 },
-      ]);
-    }
+    setProductosAgregados((prev) => {
+      const existente = prev.find((p) => p.id === producto.id);
+
+      if (existente) {
+        return prev.map((p) =>
+          p.id === producto.id ? { ...p, cantidad: p.cantidad + 1 } : p
+        );
+      }
+
+      return [...prev, { ...producto, cantidad: 1 }];
+    });
   };
 
   const incrementarCantidad = (id) => {
-    setProductosAgregados(
-      productosAgregados.map((producto) =>
+    setProductosAgregados((prev) =>
+      prev.map((producto) =>
         producto.id === id
           ? { ...producto, cantidad: producto.cantidad + 1 }
           : producto
@@ -27,17 +29,25 @@ const CartProvider = ({ children }) => {
   };
 
   const disminuirCantidad = (id) => {
-    setProductosAgregados((prevProductos) => {
-      const producto = prevProductos.find((p) => p.id === id);
+    setProductosAgregados((prev) => {
+      const prod = prev.find((p) => p.id === id);
 
-      if (producto && producto.cantidad > 1) {
-        return prevProductos.map((p) =>
+      if (prod && prod.cantidad > 1) {
+        return prev.map((p) =>
           p.id === id ? { ...p, cantidad: p.cantidad - 1 } : p
         );
-      } else {
-        return prevProductos.filter((p) => p.id !== id);
       }
+
+      return prev.filter((p) => p.id !== id);
     });
+  };
+
+  const eliminarProducto = (id) => {
+    setProductosAgregados((prev) => prev.filter((p) => p.id !== id));
+  };
+
+  const vaciarCarrito = () => {
+    setProductosAgregados([]);
   };
 
   return (
@@ -47,6 +57,8 @@ const CartProvider = ({ children }) => {
         agregarAlCarrito,
         incrementarCantidad,
         disminuirCantidad,
+        eliminarProducto,
+        vaciarCarrito,
       }}
     >
       {children}

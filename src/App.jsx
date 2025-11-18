@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer";
@@ -16,7 +17,7 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <Router>
-          <Nav />
+          <Header />
           <Routes>
             <Route path="/" element={<ItemListContainer />} />
             <Route path="/producto/:id" element={<ItemDetailContainer />} />
@@ -26,7 +27,6 @@ function App() {
 
             <Route path="/carrito" element={<Carrito />} />
 
-            {/* Admin: protegido */}
             <Route
               path="/admin"
               element={

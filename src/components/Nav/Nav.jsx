@@ -2,63 +2,57 @@ import "./Nav.css";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import useCartContext from "../../context/useCartContext";
+import { useAuth } from "../../context/AuthContext";
 
-const Nav = ({ isAuthenticated, setIsAuthenticated }) => {
+const Nav = () => {
   const location = useLocation();
   const { productosAgregados } = useCartContext();
+  const { isAuthenticated, logout } = useAuth();
 
   const cantidadTotal = productosAgregados.reduce(
     (acc, producto) => acc + producto.cantidad,
     0
   );
 
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-  };
-
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header>
-      <h1 className="mainTitle">KF Premium Coffee</h1>
-      <nav>
-        <Link className={isActive("/") ? "active" : ""} to="/">
-          Home
-        </Link>
-        <Link className={isActive("/about") ? "active" : ""} to="/about">
-          Sobre nosotros
-        </Link>
-        <Link className={isActive("/contacto") ? "active" : ""} to="/contacto">
-          Contacto
-        </Link>
+    <nav className="mainNav">
+      <Link className={isActive("/") ? "active" : ""} to="/">
+        Home
+      </Link>
 
-        {isAuthenticated ? (
-          <>
-            <Link className={isActive("/admin") ? "active" : ""} to="/admin">
-              Admin
-            </Link>
-            <Link
-              className={isActive("/carrito") ? "active aCarrito" : "aCarrito"}
-              to="/carrito"
-            >
-              Carrito{" "}
-              {cantidadTotal ? (
-                <p className="cantItemsCarrito">{cantidadTotal}</p>
-              ) : (
-                ""
-              )}
-            </Link>
-            <button className="log" onClick={handleLogout}>
-              Cerrar sesión
-            </button>
-          </>
+      <Link className={isActive("/about") ? "active" : ""} to="/about">
+        Sobre nosotros
+      </Link>
+
+      <Link className={isActive("/contacto") ? "active" : ""} to="/contacto">
+        Contacto
+      </Link>
+
+      <Link
+        className={isActive("/carrito") ? "active aCarrito" : "aCarrito"}
+        to="/carrito"
+      >
+        Carrito{" "}
+        {cantidadTotal ? (
+          <p className="cantItemsCarrito">{cantidadTotal}</p>
         ) : (
-          <Link className={isActive("/login") ? "active" : ""} to="/login">
-            Iniciar sesión
-          </Link>
+          ""
         )}
-      </nav>
-    </header>
+      </Link>
+
+      {isAuthenticated && (
+        <>
+          <Link className={isActive("/admin") ? "active" : ""} to="/admin">
+            Admin
+          </Link>
+          <button className="log" onClick={logout}>
+            Cerrar sesión
+          </button>
+        </>
+      )}
+    </nav>
   );
 };
 

@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useCartContext from "../../context/useCartContext";
 
-const ItemDetailContainer = ({ isAuthenticated }) => {
+const ItemDetailContainer = () => {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const { agregarAlCarrito } = useCartContext();
-  const navigate = useNavigate();
-
-  const handleAgregarAlCarrito = (producto) => {
-    if (isAuthenticated) {
-      agregarAlCarrito(producto);
-    } else {
-      navigate("/login");
-    }
-  };
 
   useEffect(() => {
     setCargando(true);
@@ -35,9 +26,7 @@ const ItemDetailContainer = ({ isAuthenticated }) => {
   if (error) return <p>Error: {error}</p>;
   if (!producto) return <p>Producto no encontrado</p>;
 
-  return (
-    <ItemDetail producto={producto} agregarAlCarrito={handleAgregarAlCarrito} />
-  );
+  return <ItemDetail producto={producto} agregarAlCarrito={agregarAlCarrito} />;
 };
 
 export default ItemDetailContainer;

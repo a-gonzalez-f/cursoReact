@@ -1,19 +1,9 @@
 import React from "react";
 import "./Item.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LevelCircles from "../LevelCircles/LevelCircles";
 
-const Item = ({ producto, agregarAlCarrito, isAuthenticated }) => {
-  const navigate = useNavigate();
-
-  const handleAgregarAlCarrito = () => {
-    if (isAuthenticated) {
-      agregarAlCarrito(producto);
-    } else {
-      navigate("/login");
-    }
-  };
-
+const Item = ({ producto, agregarAlCarrito }) => {
   return (
     <div className="producto card">
       <Link to={`/producto/${producto.id}`}>
@@ -22,6 +12,7 @@ const Item = ({ producto, agregarAlCarrito, isAuthenticated }) => {
           alt={producto.nombre}
           className="smallImage"
         />
+
         <h3>{producto.nombre}</h3>
         <p>{producto.categoria}</p>
 
@@ -37,7 +28,10 @@ const Item = ({ producto, agregarAlCarrito, isAuthenticated }) => {
 
         <p className="precioEsquina">${producto.precio}</p>
       </Link>
-      <button onClick={handleAgregarAlCarrito}>Agregar al carrito</button>
+
+      <button onClick={() => agregarAlCarrito(producto)}>
+        Agregar al carrito
+      </button>
     </div>
   );
 };

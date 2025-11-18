@@ -1,20 +1,46 @@
-import React, { useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
-const Login = ({ setIsAuthenticated, isAuthenticated }) => {
-  const handleLogin = () => {
-    setIsAuthenticated(true);
+const Login = () => {
+  const { login, isAuthenticated } = useAuth();
+  const [user, setUser] = useState("");
+  const [pass, setPass] = useState("");
+  const navigate = useNavigate();
+
+  // Redirección si ya está autenticado
+  useEffect(() => {
+    if (isAuthenticated) navigate("/admin");
+  }, [isAuthenticated, navigate]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const ok = login(user, pass);
+    if (ok) {
+      navigate("/admin");
+    } else {
+      alert("Credenciales incorrectas");
+    }
   };
 
-  if (isAuthenticated) {
-    return <Navigate to="/" />;
-  }
-
   return (
-    <div>
-      <h2>Login</h2>
-      <button onClick={handleLogin}>Iniciar sesión</button>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        value={user}
+        onChange={(e) => setUser(e.target.value)}
+        placeholder="Usuario"
+      />
+
+      <input
+        value={pass}
+        type="password"
+        onChange={(e) => setPass(e.target.value)}
+        placeholder="Contraseña"
+      />
+
+      <button type="submit">Ingresar</button>
+    </form>
   );
 };
 
