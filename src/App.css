@@ -35,10 +35,6 @@ body {
   justify-content: center;
 }
 
-.mainTitle {
-  font-size: 30px;
-}
-
 button {
   background-color: var(--color-secondary);
   margin: 5px;
