@@ -10,6 +10,7 @@ import Contacto from "./components/Contacto/Contacto";
 import Admin from "./components/AdminComponents/Admin";
 import Login from "./components/Login/Login";
 import CartProvider from "./context/CartProvider";
+import { ProductFormContainer } from "./components/AdminComponents/ProductFormContainer/ProductFormContainer";
 import { AuthProvider, ProtectedRoute } from "./context/AuthContext";
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
               path="/admin"
               element={
                 <ProtectedRoute>
-                  <Admin />
+                  <ProductFormContainer />
                 </ProtectedRoute>
               }
             />
