@@ -1,35 +1,34 @@
-/* Contenedor del formulario */
 .product-form {
   max-width: 720px;
   margin: 2rem auto;
   padding: 1.25rem 1.5rem;
-  background: #2c2c2c; /* gris oscuro */
-  color: #f0f0f0; /* texto claro */
+  background: #2c2c2c;
+  color: #f0f0f0;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  gap: 0;
+  display: block;
 }
 
-/* Título */
 .product-form h2 {
   margin: 0 0 1rem 0;
   font-size: 1.6rem;
   color: #fff;
 }
 
-/* Filas del formulario (tus <div>) */
 .product-form > div {
   display: grid;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  justify-content: unset;
+  justify-items: start;
 }
 
-/* Label + elementos */
 .product-form label {
   font-size: 0.95rem;
   color: #ddd;
 }
 
-/* Inputs / textarea */
 .product-form input[type="text"],
 .product-form input[type="number"],
 .product-form input[type="file"],
@@ -44,32 +43,28 @@
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 
-/* Placeholder más tenue */
 .product-form ::placeholder {
   color: #aaa;
 }
 
-/* Hover/focus */
 .product-form input[type="text"]:focus,
 .product-form input[type="number"]:focus,
 .product-form input[type="file"]:focus,
 .product-form textarea:focus {
-  border-color: #5aa3ff;
+  border-color: var(--color-border);
   background: #353535;
 }
 
-/* Textarea */
 .product-form textarea {
   min-height: 120px;
-  resize: vertical;
+  height: auto;
+  resize: none;
 }
 
-/* Nota pequeña (tu <small>) */
 .product-form small {
   color: #bdbdbd;
 }
 
-/* Preview de imagen */
 .product-form img {
   display: block;
   max-width: 220px;
@@ -78,7 +73,6 @@
   margin-top: 0.35rem;
 }
 
-/* Botón principal reutilizable */
 .btn-admin {
   display: inline-block;
   padding: 0.6rem 1rem;
@@ -102,7 +96,6 @@
   cursor: not-allowed;
 }
 
-/* Layout responsive (opcional, si más adelante querés dos columnas) */
 @media (min-width: 640px) {
   .product-form .row-2 {
     display: grid;

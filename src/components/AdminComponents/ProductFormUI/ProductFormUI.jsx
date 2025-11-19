@@ -27,6 +27,7 @@ export const ProductFormUI = ({
             type="number"
             name="price"
             value={product.price}
+            min={1}
             onChange={onChange}
             required
           />
