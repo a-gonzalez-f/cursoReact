@@ -32,7 +32,9 @@
 .product-form input[type="text"],
 .product-form input[type="number"],
 .product-form input[type="file"],
-.product-form textarea {
+.product-form textarea,
+.product-form select,
+.product-form option {
   width: 100%;
   padding: 0.6rem 0.75rem;
   border: 1px solid #444;

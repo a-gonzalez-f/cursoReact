@@ -7,7 +7,7 @@ import { createProduct } from "../../../services/products";
 import "../ProductFormContainer/ProductFormContainer.css";
 
 export const ProductFormContainer = () => {
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState("");
   const [file, setFile] = useState(null);
   const [product, setProduct] = useState({
@@ -15,6 +15,10 @@ export const ProductFormContainer = () => {
     price: "",
     category: "",
     description: "",
+    stock: "",
+    amargor: "",
+    intensidad: "",
+    origen: "",
   });
 
   const handleChange = (e) => {
@@ -42,6 +46,10 @@ export const ProductFormContainer = () => {
         categoria: product.category,
         descripcion: product.description,
         imagen: imageUrl,
+        stock: product.stock,
+        amargor: product.amargor,
+        intensidad: product.intensidad,
+        origen: product.origen,
       };
 
       await createProduct(productData);

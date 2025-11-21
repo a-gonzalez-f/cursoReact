@@ -21,5 +21,17 @@ export const validateProduct = (product, fileRequired = true) => {
     errors.file = "Debes seleccionar una imagen";
   }
 
+  if (!product.stock || product.stock <= 0) {
+    errors.stock = "El stock debe ser mayor o igual a cero";
+  }
+
+  if (!product.intensidad) {
+    errors.intensidad = "Debes seleccionar la intensidad";
+  }
+
+  if (!product.amargor) {
+    errors.amargor = "Debes seleccionar el amargor";
+  }
+
   return errors;
 };

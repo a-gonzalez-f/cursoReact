@@ -54,6 +54,43 @@ export const ProductFormUI = ({
           {errors.description && <p className="error">{errors.description}</p>}
         </div>
         <div>
+          <label>Intensidad:</label>
+          <select
+            name="intensidad"
+            value={product.intensidad}
+            onChange={onChange}
+          >
+            <option value="">Seleccionar...</option>
+            <option value="Bajo">Bajo</option>
+            <option value="Medio">Medio</option>
+            <option value="Alto">Alto</option>
+          </select>
+          {errors.intensidad && <p className="error">{errors.intensidad}</p>}
+        </div>
+
+        <div>
+          <label>Amargor:</label>
+          <select name="amargor" value={product.amargor} onChange={onChange}>
+            <option value="">Seleccionar...</option>
+            <option value="Bajo">Bajo</option>
+            <option value="Medio">Medio</option>
+            <option value="Alto">Alto</option>
+          </select>
+          {errors.amargor && <p className="error">{errors.amargor}</p>}
+        </div>
+
+        <div>
+          <label>Stock:</label>
+          <input
+            type="number"
+            name="stock"
+            value={product.stock}
+            onChange={onChange}
+            required
+          />
+          {errors.stock && <p className="error">{errors.stock}</p>}
+        </div>
+        <div>
           <label>Imagen:</label>
           <input
             type="file"
