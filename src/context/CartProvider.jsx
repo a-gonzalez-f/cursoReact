@@ -50,6 +50,11 @@ const CartProvider = ({ children }) => {
     setProductosAgregados([]);
   };
 
+  const procederCompra = () => {
+    alert("Gracias por su compra!");
+    setProductosAgregados([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -59,6 +64,7 @@ const CartProvider = ({ children }) => {
         disminuirCantidad,
         eliminarProducto,
         vaciarCarrito,
+        procederCompra,
       }}
     >
       {children}

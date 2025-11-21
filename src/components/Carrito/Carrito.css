@@ -1,16 +1,15 @@
 .carrito {
-  min-height: 33vh;
   min-width: 50vw;
-  background-color: var(--color-primary);
+  background-color: var(--color-surface);
   border-radius: 20px;
-  padding: 1rem;
+  padding: 0 1rem;
   overflow-y: auto;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .enCarrito {
-  border: 1px solid var(--color-border);
-  border-radius: 5px;
+  border-bottom: 1px solid var(--color-border);
   padding: 10px;
   font-size: 15px;
   width: 100%;
@@ -25,11 +24,8 @@
 }
 
 .total {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: var(--color-secondary);
-  color: var(--color-bg);
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 25px;
 }
 
 .cantidad {
@@ -55,4 +51,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.actionsCart {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 0 1rem 0;
+  align-items: center;
+}
+
+.vaciarBtn {
+  font-size: 12px;
+  background-color: transparent;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.pagar {
+  margin: 0;
 }

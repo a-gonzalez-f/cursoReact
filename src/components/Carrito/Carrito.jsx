@@ -10,6 +10,7 @@ const Carrito = () => {
     disminuirCantidad,
     eliminarProducto,
     vaciarCarrito,
+    procederCompra,
   } = useCartContext();
 
   const total = productosAgregados.reduce(
@@ -73,16 +74,19 @@ const Carrito = () => {
       </div>
 
       {total > 0 && (
-        <>
+        <div className="actionsCart">
+          <button className="vaciarBtn" onClick={vaciarCarrito}>
+            Vaciar carrito
+          </button>
           <div className="total">
             <p>
               TOTAL: <span>${total.toFixed(2)}</span>
             </p>
           </div>
-          <button className="vaciarBtn" onClick={vaciarCarrito}>
-            Vaciar carrito
+          <button className="pagar" onClick={procederCompra}>
+            Proceder al pago
           </button>
-        </>
+        </div>
       )}
     </div>
   );
