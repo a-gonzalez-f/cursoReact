@@ -12,6 +12,7 @@
   --color-text: #eae0d5;
   --color-text-muted: #8b949e;
   --color-border: #575552;
+  --color-error: rgb(219, 39, 26);
 }
 
 * {
