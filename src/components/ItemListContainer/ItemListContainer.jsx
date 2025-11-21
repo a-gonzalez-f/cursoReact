@@ -21,7 +21,7 @@ const ItemListContainer = () => {
 
   if (cargando) return <p>Cargando productos...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (!productos) return <p>Productos no encontrados</p>;
+  if (productos.length === 0) return <p>No hay productos disponibles.</p>;
 
   return <ItemList productos={productos} agregarAlCarrito={agregarAlCarrito} />;
 };

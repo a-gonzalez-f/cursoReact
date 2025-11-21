@@ -27,7 +27,9 @@ const ItemDetail = ({ producto, agregarAlCarrito }) => {
             <p>Amargor</p>
             <LevelCircles valor={producto.amargor} />
           </div>
-          <p>{producto.descripcion || "No hay descripción"}</p>
+          <p className="descripcion">
+            {producto.descripcion || "No hay descripción"}
+          </p>
           <div className="row">
             <p className="precio">${producto.precio}</p>
             <p className="text-muted">Stock: {producto.stock || "Sin stock"}</p>

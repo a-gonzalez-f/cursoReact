@@ -21,7 +21,7 @@ const ItemDetailContainer = () => {
 
   if (cargando) return <p>Cargando producto...</p>;
   if (error) return <p>Error: {error}</p>;
-  if (!producto) return <p>Producto no encontrado</p>;
+  if (!producto || !producto.id) return <p>Producto no encontrado</p>;
 
   return <ItemDetail producto={producto} agregarAlCarrito={agregarAlCarrito} />;
 };
