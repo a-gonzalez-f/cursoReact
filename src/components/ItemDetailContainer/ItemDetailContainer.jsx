@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { useParams } from "react-router-dom";
 import useCartContext from "../../context/useCartContext";
+import { getProductById } from "../../services/products";
 
 const ItemDetailContainer = () => {
   const { id } = useParams();
@@ -12,11 +13,7 @@ const ItemDetailContainer = () => {
 
   useEffect(() => {
     setCargando(true);
-    fetch(`https://68e44eff8e116898997b8579.mockapi.io/productos/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Error al cargar el producto");
-        return res.json();
-      })
+    getProductById(id)
       .then((data) => setProducto(data))
       .catch((err) => setError(err.message))
       .finally(() => setCargando(false));

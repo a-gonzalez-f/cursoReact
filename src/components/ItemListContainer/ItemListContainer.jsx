@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
 import ItemList from "../ItemList/ItemList";
 import useCartContext from "../../context/useCartContext";
+import { getProducts } from "../../services/products";
+import { useParams } from "react-router-dom";
 
 const ItemListContainer = () => {
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const { agregarAlCarrito } = useCartContext();
+  const { categoria } = useParams();
 
   useEffect(() => {
     setCargando(true);
-    fetch("https://68e44eff8e116898997b8579.mockapi.io/productos")
-      .then((res) => {
-        if (!res.ok) throw new Error("Error al cargar los productos");
-        return res.json();
-      })
+    getProducts(categoria)
       .then((data) => setProductos(data))
       .catch((err) => setError(err.message))
       .finally(() => setCargando(false));
-  }, []);
+  }, [categoria]);
 
   if (cargando) return <p>Cargando productos...</p>;
-  if (error) return <p>Error cargando productos: {error}</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!productos) return <p>Productos no encontrados</p>;
 
   return <ItemList productos={productos} agregarAlCarrito={agregarAlCarrito} />;
 };
