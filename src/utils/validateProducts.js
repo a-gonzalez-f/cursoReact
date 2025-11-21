@@ -33,5 +33,9 @@ export const validateProduct = (product, fileRequired = true) => {
     errors.amargor = "Debes seleccionar el amargor";
   }
 
+  if (!product.origen.trim()) {
+    errors.origen = "El origen es obligatorio";
+  }
+
   return errors;
 };
